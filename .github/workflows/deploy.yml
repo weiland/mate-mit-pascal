@@ -11,16 +11,16 @@ deploy:
 
     steps:
     - name: Clone repository
-        uses: actions/checkout@v3
+      uses: actions/checkout@v3
 
     - name: Install Deno
-        uses: denoland/setup-deno@v1
+      uses: denoland/setup-deno@v1
 
     - name: Build
-        run: deno task build
+      run: deno task build
 
     - name: Deploy to Deno Deploy
-        uses: denoland/deployctl@v1
-        with:
-        project: "mate-mit-pascal"
-        entrypoint: main.ts
+      uses: denoland/deployctl@v1
+      with:
+      project: "mate-mit-pascal"
+      entrypoint: main.ts
