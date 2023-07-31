@@ -1,85 +1,101 @@
+@font-face {
+	font-family: 'African';
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url('/African.eot');
+	src: url('/African.eot?#iefix') format('embedded-opentype'),
+		url('/African.woff') format('woff'),
+		url('/African.svg#African') format('svg');
+	unicode-range: U+0000-001F, U+0021-007F;
+}
+
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+	/* --cm-blue: rgb(25, 55, 129); */
+	--cm-blue: #1a3882;
+	--cm-text-blue: #193781;
+	--cm-red: #ca1e15;
+	--cm-orange: #ebae3d;
+	--cm-sand: #edd2aa;
+	--cm-dark-orange: #c88a35;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+	--white: #ccc;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 400;
+
+	color-scheme: light dark;
+
+	--background-color: var(--cm-dark-orange);
+	--primary-color: var(--cm-text-blue);
+	--secondary-color: var(--cm-red);
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+
+	background-color: var(--background-color);
+	color: var(--primary-color);
+}
+
+h1, h2, h3 {
+	color: var(--secondary-color);
 }
 
 #app {
 	display: contents;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+.la-main {
+	max-width: 80rem;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.font--mate {
+	font-family: 'African';  
+	color: var(--cm-blue);
 }
 
 .card {
-  padding: 2em;
+	max-width: 42rem;
+	margin: 0 auto;
+	padding: 1em;
+	border-image: url('/card-border.png') 30 / 19px round;
+}
+.card-content {
+	padding: 2em;
+	background: radial-gradient(#FBED9C, #fdc400);
+	border-radius: 1rem;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+h1 {
+	font-size: 3.2em;
+	line-height: 1.5;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+	:root {
+		--white: #fff;
+		--color: var(--cm-blue);
+		--background-color: var(--cm-sand);
+	}
 }
+
+.footer {
+	padding: 1rem 3rem;
+	background-color: #0c2462;
+	color: var(--white);
+}
+

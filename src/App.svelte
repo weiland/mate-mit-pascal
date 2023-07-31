@@ -1,15 +1,19 @@
 <script lang="ts">
-  //import svelteLogo from './assets/svelte.svg'
-  //import Counter from './lib/Counter.svelte'
 </script>
 
-<main>
-  <h1>Vite + Svelte</h1>
+<main class="la-main">
+	<h1 class="font--mate">🧉 Mate mit Pasci</h1>
 
-  <div class="card">
-                hi
-  </div>
+	<div class="card">
+		<div class="card-content">
+			hi
+		</div>
+	</div>
 </main>
+
+<footer class="footer">
+	ok
+</footer>
 
 <style>
 </style>

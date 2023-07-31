@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="640">
+  <path fill="#f3b800" fill-rule="evenodd" stroke="#081b64" d="M80 580c0 22.0914 17.9086 40 40 40h76c22.0914 0 40-17.9086 40-40s-17.9086-40-40-40h-76c-22.0914 0-40 17.9086-40 40Z"/>
+  <path fill="#f3b800" fill-rule="evenodd" d="M80 580h155V280H80Z"/>
+  <path fill="#f3b800" fill-rule="evenodd" d="m156.5 204.5-76 76h152Z"/>
+  <path fill="#f3b800" fill-rule="evenodd" d="M120 280h70V115h-70Z"/>
+  <path fill="#f3b800" fill-rule="evenodd" d="m121.5914 217.121 113.2204 62.759-50.4613-175.9795Z"/>
+  <path fill="#f3b800" fill-rule="evenodd" d="M194.8694 211.2347 122.844 95.97 79.6048 283.26Z"/>
+  <path fill="#002c8c" fill-rule="evenodd" d="M120 50h65V25c0-5.5228-4.4772-10-10-10h-45c-5.5229 0-10 4.4772-10 10Z"/>
+  <path fill="#e9d6bd" fill-rule="evenodd" stroke="#e9ad24" stroke-width="10" d="M92 520c0 22.0914 17.9086 40 40 40h54c22.0914 0 40-17.9086 40-40V383c0-22.0914-17.9086-40-40-40h-54c-22.0914 0-40 17.9086-40 40Z"/>
+  <path fill="#e9d6bd" fill-rule="evenodd" stroke="#e9ad24" stroke-width="6" d="m100 205 50 15h20l40-21-10-35h-15s-10.3223-13.4984-28-14c-17.6777-.5016-35 20-35 20h-12l-10 35Z"/>
+  <path fill="#d5d5d5" fill-rule="evenodd" stroke="#081b64" stroke-width="3" d="M190 389.5c0-17.9492-14.5508-32.5-32.5-32.5-17.9492 0-32.5 14.5508-32.5 32.5 0 17.9492 14.5508 32.5 32.5 32.5 17.9492 0 32.5-14.5508 32.5-32.5Z"/>
+  <path fill="#d5d5d5" fill-rule="evenodd" stroke="#081b64" d="M174 181.5c0-9.665-7.835-17.5-17.5-17.5s-17.5 7.835-17.5 17.5 7.835 17.5 17.5 17.5 17.5-7.835 17.5-17.5Z"/>
+  <path fill="#d5d5d5" fill-rule="evenodd" d="m125 60-3-10h63l-5 5v25l10 40h-73l8-40V60Z"/>
+</svg>
