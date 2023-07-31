@@ -3,11 +3,13 @@
 A template of REST API app using Oak framework
 
 
-Start the server with the command:
+Start the API server with the command:
 
 ```
-deno run --allow-net main.ts
+deno run --allow-net --allow-read main.ts
 ```
+
+which also serves static files from `dist/` which is the vite output.
 
 This starts the server at http://localhost:8000/
 
