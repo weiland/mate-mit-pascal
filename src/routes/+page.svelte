@@ -5,4 +5,5 @@
 <svelte:head>
     <title>🧉 Mate mit Pascal</title>
 </svelte:head>
+<h1>Mate</h1>
 <App />
