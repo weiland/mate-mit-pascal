@@ -1,21 +1,28 @@
-import { Router } from 'https://deno.land/x/oak@v11.1.0/mod.ts';
-import { createMeeting } from './db.ts';
+import {
+	Context,
+	helpers,
+	Router,
+} from 'https://deno.land/x/oak@v12.4.0/mod.ts';
+import { createMeeting, getAllMeetings, getMeeting } from './db.ts';
+const { getQuery } = helpers;
 
 export const apiRouter = new Router();
 apiRouter
-	.get('/api', (context) => {
-		context.response.body = { message: 'ok' };
+	.get('/api/meetings', async (context: Context) => {
+		context.response.body = await getAllMeetings();
 	})
-	.get('/api/:message', (context) => {
-		if (context?.params?.dinosaur) {
-			const found = data.find((item) =>
-				item.name.toLowerCase() ===
-					context.params.dinosaur.toLowerCase()
-			);
-			if (found) {
-				context.response.body = found;
-			} else {
-				context.response.body = { error: 'No dinosaurs found.' };
-			}
+	.get('/api/meetings/:id', async (context: Context) => {
+		const { id } = getQuery(context, { mergeParams: true });
+		const found = await getMeeting(id);
+		if (found) {
+			context.response.body = found;
+		} else {
+			context.response.body = { error: 'No meetings found.' };
 		}
+	})
+	.post('/api/meetings', async (context: Context) => {
+		const body = context.request.body();
+		const meeting = await body.value;
+		await createMeeting(meeting);
+		context.response.body = { status: 'ok' };
 	});
