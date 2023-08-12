@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import { MEETINGS_API_URL } from "./config";
 
-	let loggedIn = true;
+	let loggedIn = false;
 	let meetings: object[];
 	let error: false | string = false;
 

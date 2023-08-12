@@ -7,11 +7,12 @@
 	import { DEFAULT_NAME } from "./config";
 	import Meeting from "./Meeting.svelte";
 
-	type Page = "Form" | "Meeting" | "Overview";
+	const pages = ["form", "meeting", "overview"] as const;
+	type Page = (typeof pages)[number];
 
 	let name: string;
 	let state: string;
-	let page: Page = "Form";
+	let page: Page = "form";
 	let showBubbles = false;
 
 	let id: string;
@@ -22,11 +23,11 @@
 			id = pathname
 				.replace(meetingPrefix, "")
 				.replace("/", "");
-			if (!id) {
-				page = "Overview";
-				return;
-			}
-			page = "Meeting"
+			page = "meeting";
+		} else if (/\/overview(\/?)$/.test(pathname)) {
+			page = "overview";
+		} else if (pathname !== "/") {
+			window.location.href = "/";
 		}
 	});
 </script>
@@ -36,11 +37,11 @@
 		<h1 class="font--mate">
 			{state} Mate with <span>{name || DEFAULT_NAME}</span>
 		</h1>
-		<div class={`card${page === "Overview" ? '' : ' card--mini'}`}>
+		<div class={`card${page === "overview" ? "" : " card--mini"}`}>
 			<div class="card-content">
-				{#if page === "Meeting" && id}
+				{#if page === "meeting"}
 					<Meeting {id} />
-				{:else if page === "Overview"}
+				{:else if page === "overview"}
 					<Overview />
 				{:else}
 					<Form bind:name bind:state />

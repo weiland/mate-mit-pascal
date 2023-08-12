@@ -67,7 +67,8 @@ apiRouter
 		const body = await createMeeting(meeting);
 		context.response.body = body;
 	})
-	.post('/api/login', async (context: Context) => {
+	.post('/api/login', async (context: Context, next) => {
+		console.log('login')
 		const PASSWORD = import.meta.env.VITE_PASSWORD ??
 			Deno.env.get('PASSWORD');
 		const TOKEN = import.meta.env.VITE_TOKEN ?? Deno.env.get('TOKEN');
@@ -76,11 +77,14 @@ apiRouter
 			console.error('There are missing credentials.');
 			context.response.status = 500;
 			context.response.body = { error: 'There are missing credentials.' };
+			next();
 			return;
 		}
 
-		const form = context.request.body();
-		const { password } = await form.value;
+		const form = context.request.body({ type: 'form-data' });
+		console.log(form)
+		const data = await form.value.read();
+		const password = data.fields.password;
 		const loggedIn = password === PASSWORD;
 		if (loggedIn) {
 			await context.cookies.set('token', TOKEN);
@@ -92,6 +96,7 @@ apiRouter
 			? { status: 'ok' }
 			: { error: 'invalid password' };
 		context.response.body = body;
+		next();
 	})
 	.all('/api/:rest*', (context: Context) => {
 		context.response.status = 404;
