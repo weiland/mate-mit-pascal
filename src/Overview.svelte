@@ -125,9 +125,6 @@
 </div>
 
 <style>
-	.card {
-		max-width: 100%;
-	}
 	a,
 	a:visited {
 		color: var(--cm-blue);
