@@ -52,7 +52,6 @@
 
 	onMount(async () => {
 		if (!loggedIn) {
-			window.location.href = "/";
 			return;
 		}
 		await fetchMeetings();
@@ -65,7 +64,13 @@
 			{error}
 		</p>
 	{/if}
-	{#if meetings}
+	{#if !loggedIn}
+		<form action="/api/login" method="POST">
+			<input type="password" name="password" />
+			<input type="submit" value="Login" />
+		</form>
+	{/if}
+	{#if loggedIn && meetings}
 		<table>
 			<thead>
 				<tr>

@@ -62,7 +62,7 @@ apiRouter
 	.post('/api/meetings', async (context: Context) => {
 		const form = context.request.body({ type: 'form-data' });
 		const json = await form.value.read();
-		const meeting = json.fields as Meeting;
+		const meeting = json.fields as unknown as Meeting;
 		console.log('meeting', meeting);
 		const body = await createMeeting(meeting);
 		context.response.body = body;
@@ -83,9 +83,10 @@ apiRouter
 		const { password } = await form.value;
 		const loggedIn = password === PASSWORD;
 		if (loggedIn) {
-			context.response.headers = {
-				'set-cookie': `token=${TOKEN}`,
-			};
+			await context.cookies.set('token', TOKEN);
+			// context.response.headers = {
+			// 	'set-cookie': `token=${TOKEN}`,
+			// };
 		}
 		const body = loggedIn
 			? { status: 'ok' }

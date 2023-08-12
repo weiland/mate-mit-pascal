@@ -29,8 +29,8 @@ const kv = await Deno.openKv();
  */
 export async function getAllMeetings(): DBMeetingResponse {
 	const meetings: Meeting[] = [];
-	for await (const res of kv.list({ prefix: ['meeting'] })) {
-		meetings.push(res.value as Meeting);
+	for await (const res of kv.list<Meeting>({ prefix: ['meeting'] })) {
+		meetings.push(res.value);
 	}
 	return meetings;
 }
@@ -41,14 +41,14 @@ export async function getAllMeetings(): DBMeetingResponse {
  */
 export async function getMeeting(id: MeetingId): DBMeetingResponse {
 	const meetingKey = ['meeting', id];
-	const response = await kv.get(meetingKey);
-	if (!response) {
+	const response = await kv.get<Meeting>(meetingKey);
+	if (!response || !response.value) {
 		return {
 			error:
 				`Something went wrong when receiving the meeting db entry with the id '${id}'.`,
 		};
 	}
-	return (response.value as Meeting ?? false);
+	return response.value;
 }
 
 /**
