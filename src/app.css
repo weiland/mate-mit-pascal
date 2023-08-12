@@ -89,15 +89,21 @@ a:hover {
 }
 
 .card {
-	max-width: 42rem;
 	margin: 0 auto;
 	padding: 1em;
 	border-image: url('/card-border.png') 30 / 19px round;
+}
+
+.card--mini {
+	max-width: 42rem;
 }
 .card-content {
 	padding: 0;
 	background: radial-gradient(var(--cm-yellow-bright), var(--cm-yellow));
 	border-radius: 1rem;
+}
+
+.card--mini .card-content {
 	font-size: 2rem;
 }
 
@@ -115,6 +121,45 @@ h1 {
 	line-height: 1.5;
 	text-align: center;
 
+}
+
+.input,
+.btn {
+	padding: 1rem 2rem;
+	border: 0;
+	border-radius: 0.5rem;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	background: rgba(255, 255, 255, 0.86);
+	box-shadow: 0 0.25rem 0.875rem 0 rgba(253, 196, 0, 0.9);
+	color: var(--cm-blue);
+}
+
+
+.btn {
+	--btn-text-color: var(--cm-blue);
+	--btn-accent-color: var(--cm-blue);
+	margin: 0.8rem;
+	border: 0.2rem solid var(--btn-accent-color);
+	background: rgba(255, 255, 255, 0.86);
+	box-shadow: 0 0.25rem 0.875rem 0 rgba(253, 196, 0, 0.9);
+	color: var(--btn-text-color);
+}
+.btn:hover {
+	background: var(--btn-accent-color);
+	color: var(--white);
+	cursor: pointer;
+}
+.btn:active {
+	background-color: #0c2462;
+	color: var(--white);
+}
+.btn:focus-visible {
+	outline: none;
+	background: var(--btn-accent-color);
+	color: var(--white);
+	box-shadow: 0 0 0 0.0625rem var(--cm-yellow-bright),
+		0 0 0 0.3rem var(--cm-red);
 }
 
 .footer {

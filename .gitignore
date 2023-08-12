@@ -12,5 +12,7 @@ dist-ssr
 *.local
 .vite
 
+.env
+
 # Editor directories and files
 .DS_Store
