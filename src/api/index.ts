@@ -3,7 +3,7 @@ import {
 	helpers,
 	Router,
 } from 'https://deno.land/x/oak@v12.4.0/mod.ts';
-import { createMeeting, getAllMeetings, getMeeting } from './db.ts';
+import { createMeeting, getAllMeetings, getMeeting, Meeting } from './db.ts';
 const { getQuery } = helpers;
 
 export const apiRouter = new Router();
@@ -21,8 +21,10 @@ apiRouter
 		}
 	})
 	.post('/api/meetings', async (context: Context) => {
-		const body = context.request.body();
-		const meeting = await body.value;
+		const form = context.request.body({ type: 'form-data' });
+		const json = await form.value.read();
+		const meeting = json.fields as Meeting;
+		console.log('meeting', meeting);
 		await createMeeting(meeting);
 		context.response.body = { status: 'ok' };
 	});

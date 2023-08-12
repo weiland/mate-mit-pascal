@@ -58,7 +58,8 @@
 
 	async function sendForm(event: SubmitEvent) {
 		const form = new FormData(event.target as HTMLFormElement);
-		console.log("from", form);
+		// const body = JSON.stringify(Object.fromEntries(form)); // FYI: cannot handle multi-selects
+		// console.log("body", body);
 		return await fetch("/api/meetings", {
 			method: 'post',
 			body: form,

@@ -1,5 +1,6 @@
 /// <reference lib="deno.unstable" />
-//
+import { crypto } from "https://deno.land/std@0.194.0/crypto/mod.ts";
+
 export interface Meeting {
 	id: string;
 	name: string;
@@ -41,8 +42,10 @@ export async function getMeeting(id: string) {
  * @param meeting
  */
 
-export async function createMeeting(meeting: Meeting) {
-	const meetingKey = ['meeting', meeting.id];
+export async function createMeeting(meeting: Partial<Meeting>) {
+	const uuid = crypto.randomUUID();
+	meeting.id = uuid;
+	const meetingKey = ['meeting', uuid];
 	const ok = await kv.set(meetingKey, meeting);
 	if (!ok) throw new Error('Something went wrong when creating.');
 }
