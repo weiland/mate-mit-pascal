@@ -3,7 +3,15 @@ import {
 	helpers,
 	Router,
 } from 'https://deno.land/x/oak@v12.4.0/mod.ts';
-import { createMeeting, getAllMeetings, getMeeting, cancelMeeting, finishMeeting, deleteMeeting, Meeting } from './db.ts';
+import {
+	cancelMeeting,
+	createMeeting,
+	deleteMeeting,
+	finishMeeting,
+	getAllMeetings,
+	getMeeting,
+	Meeting,
+} from './db.ts';
 const { getQuery } = helpers;
 
 export const apiRouter = new Router();
@@ -60,15 +68,28 @@ apiRouter
 		context.response.body = body;
 	})
 	.post('/api/login', async (context: Context) => {
+		const PASSWORD = import.meta.env.VITE_PASSWORD ??
+			Deno.env.get('PASSWORD');
+		const TOKEN = import.meta.env.VITE_TOKEN ?? Deno.env.get('TOKEN');
+
+		if (!PASSWORD || !TOKEN) {
+			console.error('There are missing credentials.');
+			context.response.status = 500;
+			context.response.body = { error: 'There are missing credentials.' };
+			return;
+		}
+
 		const form = context.request.body();
 		const { password } = await form.value;
 		const loggedIn = password === PASSWORD;
 		if (loggedIn) {
 			context.response.headers = {
-				'set-cookie': `token=${TOKEN}`
-			}
+				'set-cookie': `token=${TOKEN}`,
+			};
 		}
-		const body = loggedIn ? { status: 'ok' } : { error: 'invalid password' };
+		const body = loggedIn
+			? { status: 'ok' }
+			: { error: 'invalid password' };
 		context.response.body = body;
 	})
 	.all('/api/:rest*', (context: Context) => {

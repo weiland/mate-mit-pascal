@@ -40,9 +40,3 @@ export const DEFAULT_STATE: NamesMapKeys = 'drink';
 export const API_BASE_URL = `${import.meta.env.VITE_API_HOST ?? (Deno.env.get('API_HOST') ?? '')}/api`;
 export const MEETINGS_API_URL = `${API_BASE_URL}/meetings`;
 
-export const PASSWORD = import.meta.env.VITE_PASSWORD ?? Deno.env.get('PASSWORD');
-export const TOKEN = import.meta.env.VITE_TOKEN ?? Deno.env.get('TOKEN');
-
-if (!PASSWORD || !TOKEN) {
-	console.error('There are missing configs.');
-}
