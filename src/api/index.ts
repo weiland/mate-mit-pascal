@@ -3,7 +3,7 @@ import {
 	helpers,
 	Router,
 } from 'https://deno.land/x/oak@v12.4.0/mod.ts';
-import { load } from 'https://deno.land/std/dotenv/mod.ts';
+import { load } from 'https://deno.land/std@0.194.0/dotenv/mod.ts';
 import {
 	cancelMeeting,
 	createMeeting,

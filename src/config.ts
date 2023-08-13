@@ -1,5 +1,7 @@
 /// <reference types="npm:vite@^4.0.0/client" />
-export const DEFAULT_NAME = import.meta.env.VITE_NAME ?? (import.meta.env.NAME ?? 'Pasci');
+export const DEFAULT_NAME = Deno.env.has('NAME')
+	? Deno.env.get('NAME')
+	: 'NoName';
 export const OTHER_DRINK = 'other';
 export const DRINKS = [
 	'Traditional Mate 🧉',
@@ -23,7 +25,7 @@ export function getDefaultDrink(): string {
 	return DRINKS[0];
 }
 
-export const namesMap  = {
+export const namesMap = {
 	amount: '🔄',
 	name: '🫵',
 	drink: '🧉',
@@ -37,6 +39,7 @@ export type NamesMapKeys = keyof typeof namesMap;
 
 export const DEFAULT_STATE: NamesMapKeys = 'drink';
 
-export const API_BASE_URL = `${import.meta.env?.VITE_API_HOST ?? (import.meta.env?.API_HOST  ?? '')}/api`;
+export const API_BASE_URL = `${
+	Deno.env.has('API_HOST') ? Deno.env.get('API_HOST') : ''
+}/api`;
 export const MEETINGS_API_URL = `${API_BASE_URL}/meetings`;
-
