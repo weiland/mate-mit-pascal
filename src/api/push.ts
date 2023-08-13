@@ -1,5 +1,5 @@
 /// <reference lib="deno.unstable" />
-import webpush from 'npm:web-push';
+// import webpush from 'npm:web-push'; // Deno Deploy does not support it (also it does not work in Deno)
 
 export interface PushSubscription {
 	userId?: string;
@@ -101,11 +101,11 @@ function sendPushToUser(
 	// 	},
 	// });
 
-	return webpush.sendNotification(
-		subscription,
-		payload, // || notification,
-		options,
-	);
+	// return webpush.sendNotification(
+	// 	subscription,
+	// 	payload, // || notification,
+	// 	options,
+	// );
 	// .catch((e: Error) => console.error('web-push err', e));
 }
 
