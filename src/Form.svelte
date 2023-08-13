@@ -205,6 +205,7 @@
 			class="btn"
 			on:mouseover={() => (showMyFace = true)}
 			on:focus={() => (showMyFace = true)}
+			on:blur={() => (showMyFace = false)}
 			on:mouseleave={() => (showMyFace = false)}
 			>👉 Let's drink a {(drink === OTHER_DRINK
 				? other_drink
@@ -252,6 +253,12 @@
 		transition: none;
 		box-shadow: 0 0 0 0.125rem var(--cm-yellow-bright),
 			0 0 0 0.4rem var(--cm-blue);
+	}
+
+	button[disabled] {
+		opacity: 0.5;
+		cursor: pointer;
+		pointer-events: none;
 	}
 
 	/* .input:invalid { */
