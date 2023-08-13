@@ -4,7 +4,7 @@
 		"build": "deno run -A --node-modules-dir npm:vite build",
 		"preview": "deno run -A --node-modules-dir npm:vite preview",
 		"serve": "deno run --allow-net --allow-read https://deno.land/std@0.157.0/http/file_server.ts dist/",
-		"api": "deno run -A --watch --unstable main.ts"
+		"api": "IS_DEV=true deno run -A --watch --unstable main.ts"
 	},
 
 	"fmt": {

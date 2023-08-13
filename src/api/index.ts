@@ -15,10 +15,15 @@ import {
 } from './db.ts';
 const { getQuery } = helpers;
 
-const env = await load({ allowEmptyValues: true });
-const TOKEN = Deno.env.get('TOKEN') ?? env['TOKEN'];
+let env: Record<string, string|undefined> = {};
+if (Deno.env.has('IS_DEV') && Deno.env.get('IS_DEV') === 'true') {
+	// local env -> source dotenv
+	env = await load({ allowEmptyValues: true });
+}
 
-console.log('token', Deno.env.get('TOKEN'), env['TOKEN']);
+const TOKEN = Deno.env.get('TOKEN') ?? env.TOKEN;
+
+console.log('token', TOKEN);
 
 const isLoggedIn = async (context: Context): Promise<boolean> =>
 	TOKEN === await context.cookies.get('token');
