@@ -21,4 +21,5 @@
 
 {#if loggedIn}
 	| <button on:click|preventDefault={logout}>Logout</button>
+	| <a href="/overview">Overview</a>
 {/if}
