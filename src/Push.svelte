@@ -69,6 +69,7 @@
 					initializeUI();
 				})
 				.catch((error) => {
+					error = "service worker error"
 					console.error(
 						"Service Worker Error",
 						error
