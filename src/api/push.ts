@@ -76,7 +76,7 @@ async function fakePush(subscription: PushSubscription, message: string) {
 		method: 'POST',
 		mode: 'cors',
 	};
-	console.log('options', options);
+	console.log('options', options, subscription, publicKey, privateKey, message, otherHost);
 	return await fetch(`${otherHost}api/send-push-msg`, options);
 }
 
