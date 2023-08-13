@@ -50,7 +50,7 @@
 				}
 
 				updateBtn();
-			});
+			}).catch(e => console.error('pushManager error', e));
 	};
 
 	const handlePushNotifications = () => {
