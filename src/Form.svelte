@@ -204,6 +204,7 @@
 			disabled={inProgress}
 			class="btn"
 			on:mouseover={() => (showMyFace = true)}
+			on:focus={() => (showMyFace = true)}
 			on:mouseleave={() => (showMyFace = false)}
 			>👉 Let's drink a {(drink === OTHER_DRINK
 				? other_drink
