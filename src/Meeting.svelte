@@ -63,7 +63,7 @@
 
 {#if meeting}
 	<div class={meeting.cancelledAt ? "cancelled" : ""}>
-		See you, <b>{meeting.name}</b>! <span class="wave">👋</span>
+		See you, <b class="name">{meeting.name}</b>! <span class="wave">👋</span>
 		And looking forward for our <b>{meeting.drink}</b>.
 		<ul>
 			{#each Object.entries(meeting) as [key, value]}
@@ -100,6 +100,9 @@
 </p>
 
 <style>
+	.name {
+		word-break: break-word;
+	}
 	a,
 	a:visited {
 		color: var(--cm-blue);
