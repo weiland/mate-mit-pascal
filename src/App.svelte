@@ -43,7 +43,7 @@
 				<a href="/" aria-label="Go to Startpage">Mate</a
 				>
 			{/if}
-			with <span>{name || DEFAULT_NAME}</span>
+			with <span class={page === "form" ? 'break-words' : ''}>{name || DEFAULT_NAME}</span>
 		</h1>
 		<div class={`card${page === "overview" ? "" : " card--mini"}`}>
 			<div class="card-content">
@@ -62,7 +62,7 @@
 <Footer />
 
 <style>
-	h1 span {
+	.break-words {
 		word-break: break-all;
 	}
 	h1 a,
