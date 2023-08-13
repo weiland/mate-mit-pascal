@@ -15,7 +15,7 @@ import {
 } from './db.ts';
 const { getQuery } = helpers;
 
-const env = await load();
+const env = await load({ allowEmptyValues: true });
 const TOKEN = Deno.env.get('TOKEN') ?? env['TOKEN'];
 
 console.log('token', Deno.env.get('TOKEN'), env['TOKEN']);

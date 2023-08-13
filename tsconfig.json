@@ -17,7 +17,8 @@
     "forceConsistentCasingInFileNames": true,
     "types": [
       "npm:vitest",
-      "npm:vite/client"
+      "vite/client",
+      "npm:vite@^4.0.0/client"
     ],
     "paths": {
       "~/*": ["src/*"]
