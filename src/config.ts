@@ -40,4 +40,4 @@ const API_HOST = import.meta.env.VITE_API_HOST ?? '';
 export const API_BASE_URL = `${API_HOST}/api`;
 export const MEETINGS_API_URL = `${API_BASE_URL}/meetings`;
 
-export const PUBLIC_KEY = import.meta.env.VITE_PUSH_PUBLIC_KEY ?? '';
+export const PUBLIC_KEY = 'BNNgw7qhfBReZAmMtBaFSWWvG8NsytPFJvNnSsz3I31xg10hjDYvN7UkV4RY-cyOi8JLfraAEH78PuGBF7zkfRA';

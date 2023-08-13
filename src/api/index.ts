@@ -5,6 +5,7 @@ import {
 } from 'https://deno.land/x/oak@v12.4.0/mod.ts';
 import {
 	cancelMeeting,
+	confirmMeeting,
 	createMeeting,
 	deleteMeeting,
 	finishMeeting,
@@ -64,6 +65,16 @@ apiRouter
 	.put('/api/meetings/:id/cancel', async (context: Context) => {
 		const { id } = getQuery(context, { mergeParams: true });
 		const cancelled = await cancelMeeting(id);
+		if (cancelled) {
+			context.response.body = { status: 'ok' };
+		} else {
+			context.response.status = 404;
+			context.response.body = { error: 'No meetings found.' };
+		}
+	})
+	.put('/api/meetings/:id/confirm', async (context: Context) => {
+		const { id } = getQuery(context, { mergeParams: true });
+		const cancelled = await confirmMeeting(id);
 		if (cancelled) {
 			context.response.body = { status: 'ok' };
 		} else {

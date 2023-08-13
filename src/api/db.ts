@@ -10,6 +10,7 @@ export interface Meeting {
 	when: string;
 	extra: string;
 	createdAt: string;
+	confirmedAt?: string;
 	note?: string; // my note (not yet used)
 	cancelledAt?: string;
 	drunkAt?: string; // when a meeting took place
@@ -66,6 +67,23 @@ export async function createMeeting(meeting: Meeting): DBMeetingResponse {
 		};
 	}
 	return { ...meeting, id: uuid };
+}
+
+export async function confirmMeeting(id: MeetingId): DBResponse {
+	const meetingKey = ['meeting', id];
+	try {
+		const response = await kv.get(meetingKey);
+		const meeting = response.value as Meeting;
+		meeting.confirmedAt = (new Date()).toLocaleString();
+		await kv.set(meetingKey, meeting);
+	} catch (error) {
+		console.error('meeting confirmation failed', error);
+		return {
+			error: 'Something went wrong when confirming the meeting db entry.',
+		};
+	}
+
+	return true;
 }
 
 export async function cancelMeeting(id: MeetingId): DBResponse {
