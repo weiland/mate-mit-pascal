@@ -73,7 +73,7 @@
 	});
 </script>
 
-<div>
+<div class="container">
 	{#if error}
 		<p>
 			{error}
@@ -141,6 +141,11 @@
 </div>
 
 <style>
+	.container {
+		width: 100%;
+		overflow-x: scroll;
+		position: relative;
+	}
 	a,
 	a:visited {
 		color: var(--cm-blue);
@@ -150,7 +155,7 @@
 		border-bottom: 0.125rem solid var(--cm-blue);
 	}
 	table {
-		position: relative;
+		/* position: relative; */
 	}
 	thead {
 		position: sticky;
