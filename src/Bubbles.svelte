@@ -8,7 +8,7 @@
 		Math.floor(Math.random() * (n - m + 1)) + m;
 
 	const sizes = (amount: number): number[] =>
-		new Array(amount || 0).fill(4).map(() => rnd(4, 8));
+		new Array(amount || 0).fill(4).map(() => rnd(8, 18));
 
 	const createStyle = (size: number): string => `
 		top: ${rnd(20, 80)}%;
