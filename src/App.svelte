@@ -36,7 +36,14 @@
 <Bubbles active={showBubbles}>
 	<main class="la-✋">
 		<h1 class="font--mate">
-			{state} Mate with <span>{name || DEFAULT_NAME}</span>
+			{state}
+			{#if page === "form"}
+				Mate
+			{:else}
+				<a href="/" aria-label="Go to Startpage">Mate</a
+				>
+			{/if}
+			with <span>{name || DEFAULT_NAME}</span>
 		</h1>
 		<div class={`card${page === "overview" ? "" : " card--mini"}`}>
 			<div class="card-content">
@@ -57,5 +64,9 @@
 <style>
 	h1 span {
 		word-break: break-all;
+	}
+	h1 a,
+	h1 a:visited {
+		color: var(--cm-text-blue);
 	}
 </style>
