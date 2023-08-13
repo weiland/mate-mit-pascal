@@ -1,3 +1,7 @@
+<script lang="ts">
+	import LogoutButton from "./LogoutButton.svelte";
+</script>
+
 <footer class="footer">
 	🧉 | created by <a
 		href="https://chaos.social/@pascal"
@@ -10,16 +14,17 @@
 		rel="noreferrer noopener"
 		target="_blank">github.com/mate-mit-pascal</a
 	>
-	| Club-Mate Trademark by 
+	| Club-Mate Trademark by
 	<a
 		href="https://www.club-mate.de/"
 		rel="noreferrer noopener"
 		target="_blank">club-mate.de</a
 	>
-	| Font:  
+	| Font:
 	<a
 		href="https://webfonts.ffonts.net/African.font"
 		rel="noreferrer noopener"
 		target="_blank">FFonts African Font</a
 	>
+	<LogoutButton />
 </footer>

@@ -1,19 +1,33 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Push from "./Push.svelte";
 	import { MEETINGS_API_URL } from "./config";
+	import { isLoggedIn } from "./stores";
+	import Login from "./Login.svelte";
 
 	let loggedIn = false;
 	let meetings: object[];
 	let error: false | string = false;
 
+	isLoggedIn?.subscribe(async (value: boolean) => {
+		console.log("login update (in overview) to:", value);
+		loggedIn = value;
+		if (value === true && typeof meetings === 'undefined') {
+			await fetchMeetings();
+		}
+	});
+
 	const fetchMeetings = async () => {
+		error = ""
 		try {
 			const res = await fetch(`${MEETINGS_API_URL}`, {
-				headers: {
-					authorization: `${document.cookie}`,
-				},
+				mode: "cors",
+				credentials: "include",
 			});
 			if (res.status >= 400) {
+				if (res.status === 403) {
+					loggedIn = false;
+				}
 				throw new Error(
 					`Status is ${res.status} (${res.statusText})`
 				);
@@ -25,6 +39,7 @@
 				return;
 			}
 
+			loggedIn = true;
 			meetings = json;
 
 			console.debug("meetings", meetings);
@@ -51,10 +66,10 @@
 	};
 
 	onMount(async () => {
+		await fetchMeetings();
 		if (!loggedIn) {
 			return;
 		}
-		await fetchMeetings();
 	});
 </script>
 
@@ -63,12 +78,6 @@
 		<p>
 			{error}
 		</p>
-	{/if}
-	{#if !loggedIn}
-		<form action="/api/login" method="POST">
-			<input type="password" name="password" />
-			<input type="submit" value="Login" />
-		</form>
 	{/if}
 	{#if loggedIn && meetings}
 		<table>
@@ -123,6 +132,9 @@
 				{/each}
 			</tbody>
 		</table>
+		<Push />
+	{:else if !loggedIn}
+		<Login />
 	{:else}
 		no meeting loaded yet.
 	{/if}

@@ -15,15 +15,13 @@ import {
 } from './db.ts';
 const { getQuery } = helpers;
 
-let env: Record<string, string|undefined> = {};
+let env: Record<string, string | undefined> = {};
 if (Deno.env.has('IS_DEV') && Deno.env.get('IS_DEV') === 'true') {
 	// local env -> source dotenv
 	env = await load({ allowEmptyValues: true });
 }
 
 const TOKEN = Deno.env.get('TOKEN') ?? env.TOKEN;
-
-console.log('token', TOKEN);
 
 const isLoggedIn = async (context: Context): Promise<boolean> =>
 	TOKEN === await context.cookies.get('token');
@@ -100,15 +98,13 @@ apiRouter
 			return;
 		}
 
-		const form = context.request.body();
-		const data = await form.value;
-		const loggedIn = data.has('password') &&
-			data.get('password') === PASSWORD;
+		const form = context.request.body({ type: 'form-data' });
+		const data = await form.value.read();
+		const fields = data.fields;
+		const loggedIn = fields.password &&
+			fields.password === PASSWORD;
 		if (loggedIn) {
 			await context.cookies.set('token', TOKEN);
-			// context.response.headers = {
-			// 	'set-cookie': `token=${TOKEN}`,
-			// };
 		}
 		const body = loggedIn
 			? { status: 'ok' }
