@@ -67,7 +67,7 @@ export async function createMeeting(meeting: Meeting): DBMeetingResponse {
 			error: 'Something went wrong when creating the meeting db entry.',
 		};
 	}
-	await sendPush(meeting.name, uuid);
+	await sendPush(meeting.name, uuid).catch(e => console.error('push-error', e));
 	return { ...meeting, id: uuid };
 }
 
