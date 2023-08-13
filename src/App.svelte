@@ -24,6 +24,7 @@
 				.replace(meetingPrefix, "")
 				.replace("/", "");
 			page = "meeting";
+			showBubbles = true;
 		} else if (/\/overview(\/?)$/.test(pathname)) {
 			page = "overview";
 		} else if (pathname !== "/") {
