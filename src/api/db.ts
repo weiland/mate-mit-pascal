@@ -88,6 +88,23 @@ export async function confirmMeeting(id: MeetingId): DBResponse {
 	return true;
 }
 
+export async function uncancelMeeting(id: MeetingId): DBResponse {
+	const meetingKey = ['meeting', id];
+	try {
+		const response = await kv.get(meetingKey);
+		const cancelledMeeting = response.value as Meeting;
+		cancelledMeeting.cancelledAt = undefined;
+		await kv.set(meetingKey, cancelledMeeting);
+	} catch (error) {
+		console.error('meeting uncancellation failed', error);
+		return {
+			error: 'Something went wrong when uncancelling the meeting db entry.',
+		};
+	}
+
+	return true;
+}
+
 export async function cancelMeeting(id: MeetingId): DBResponse {
 	const meetingKey = ['meeting', id];
 	try {

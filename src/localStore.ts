@@ -8,7 +8,7 @@ type Key = string;
 // type Writable = { subscribe: Function, set: Function, update: Function };
 // interface LocalStore { (key: Key, initial: Value ): Writable}
 
-export const localStore = <ValueType,>(key: Key, initial: ValueType) => {
+export const localStore = <ValueType>(key: Key, initial: ValueType) => {
 	const serialize = (value: ValueType) => JSON.stringify(value, null, 2);
 	const toObj: { (text: string): ValueType } = (text) => JSON.parse(text);
 

@@ -5,6 +5,7 @@ import {
 } from 'https://deno.land/x/oak@v12.4.0/mod.ts';
 import {
 	cancelMeeting,
+	uncancelMeeting,
 	confirmMeeting,
 	createMeeting,
 	deleteMeeting,
@@ -13,14 +14,12 @@ import {
 	getMeeting,
 	Meeting,
 } from './db.ts';
-import { sendPush, setPushSubscription } from './push.ts';
+import { setPushSubscription } from './push.ts';
 
 const { getQuery } = helpers;
 
 if (Deno.env.has('IS_DEV') && Deno.env.get('IS_DEV') === 'true') {
-	// local env -> source dotenv
 	await import('https://deno.land/std@0.194.0/dotenv/load.ts');
-	// env = await load({ allowEmptyValues: true }); // TODO(pascal): find out how to set it with autoload
 }
 
 const TOKEN = Deno.env.get('TOKEN');
@@ -55,6 +54,16 @@ apiRouter
 			return;
 		}
 		const cancelled = await finishMeeting(id);
+		if (cancelled) {
+			context.response.body = { status: 'ok' };
+		} else {
+			context.response.status = 404;
+			context.response.body = { error: 'No meetings found.' };
+		}
+	})
+	.get('/api/meetings/:id/uncancel', async (context: Context) => {
+		const { id } = getQuery(context, { mergeParams: true });
+		const cancelled = await uncancelMeeting(id);
 		if (cancelled) {
 			context.response.body = { status: 'ok' };
 		} else {

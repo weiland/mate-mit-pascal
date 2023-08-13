@@ -3,20 +3,21 @@
 	import { MEETINGS_API_URL } from "./config";
 	// import { Meeting as MeetingWithoutId, MeetingId } from "./api/db";
 	// export type MeetingType = MeetingWithoutId & { id: MeetingId };
-	let meeting: object & { id: string };
+	let meeting: object & { id: string, cancelledAt?: string };
 	export let id: string;
 
-	let error: false | string = false;
-
 	const cancelMeeting = async (id: string): Promise<void> => {
-		const doCancel = confirm("Cancel meeting?");
-		if (!doCancel) {
-			return;
-		}
 		const res = await fetch(`${MEETINGS_API_URL}/${id}/cancel`, {
 			method: "PUT",
 		});
-		console.log(res.status);
+		console.log("cancel status", res.status);
+		await fetchMeeting();
+	};
+
+	const uncancelMeeting = async (id: string): Promise<void> => {
+		const res = await fetch(`${MEETINGS_API_URL}/${id}/uncancel`);
+		console.log("uncancel status", res.status);
+		await fetchMeeting();
 	};
 
 	const deleteMeeting = async (id: string): Promise<void> => {
@@ -27,20 +28,27 @@
 		const res = await fetch(`${MEETINGS_API_URL}/${id}`, {
 			method: "DELETE",
 		});
-		console.log(res.status);
+		console.log("delete status", res.status);
+		window.location.href = "/";
 	};
 
+	const fetchMeeting = async () => {
+		const res = await fetch(`${MEETINGS_API_URL}/${id}`);
+		if (res.status >= 400) {
+			throw new Error(
+				`Status is ${res.status} (${res.statusText})`
+			);
+		}
+		const json = await res.json();
+		if (json.error) {
+			throw new Error(`Meeting Error (${json.error})`);
+		}
+		meeting = { ...json, id };
+		console.debug("meeting", meeting);
+	};
 	onMount(async () => {
 		try {
-			const res = await fetch(`${MEETINGS_API_URL}/${id}`);
-			if (res.status >= 400) {
-				throw new Error(
-					`Status is ${res.status} (${res.statusText})`
-				);
-			}
-			const json = await res.json();
-			meeting = { ...json, id };
-			console.debug("meeting", meeting);
+			await fetchMeeting();
 		} catch (e) {
 			// Go back home from an non-existing meeting page.
 			window.location.href = "/";
@@ -57,19 +65,28 @@
 				{/if}
 			{/each}
 		</ul>
+
+		{#if meeting.cancelledAt}
+			<button
+				class="btn"
+				on:click={() => uncancelMeeting(meeting.id)}
+				><i>un</i>cancel meeting</button
+			>
+		{:else}
+			<button
+				class="btn btn--danger"
+				on:click={() => cancelMeeting(meeting.id)}
+				>cancel meeting</button
+			>
+		{/if}
+		<button
+			class="btn btn--danger"
+			on:click={() => deleteMeeting(meeting.id)}
+			>delete meeting</button
+		>
 	{:else}
 		no meeting loaded yet.
 	{/if}
-	<button
-		class="btn btn--danger"
-		on:click={() => cancelMeeting(meeting.id)}
-		>cancel meeting</button
-	>
-	<button
-		class="btn btn--danger"
-		on:click={() => deleteMeeting(meeting.id)}
-		>delete meeting</button
-	>
 	<p>
 		<a href="/">go back to startpage</a>
 	</p>

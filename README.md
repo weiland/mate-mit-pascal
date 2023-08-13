@@ -1,16 +1,31 @@
-# REST API
+# Drink Mate with me 🧉
 
-A template of REST API app using Oak framework
+An application to keep track of people to drink a drink with.
 
+## Tech Stack
 
-Start the API server with the command:
+- Deno
+- Frontend: TypeScript + Vite + Svelte
+- Backend: Deno's oak & Deno KV
+- Deno Deploy
 
+## Requirements
+
+- Deno >= 1.32
+
+## Tasks
+
+```commands
+# Frontend development
+deno task dev
+
+# Backend development (API)
+deno task api
+
+# Fronted build
+deno task build
 ```
-deno run --allow-net --allow-read main.ts
-```
 
-which also serves static files from `dist/` which is the vite output.
+#### License
 
-This starts the server at http://localhost:8000/
-
-Try go to http://localhost:8000/api/Brachiosaurus or http://localhost:8000/api/
+ISC
