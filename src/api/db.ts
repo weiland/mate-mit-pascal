@@ -7,6 +7,7 @@ export type MeetingId = string;
 export interface Meeting {
 	id?: MeetingId;
 	name: string;
+	lastname: string; // hidden captcha
 	where: string;
 	when: string;
 	extra: string;

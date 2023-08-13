@@ -3,7 +3,7 @@
 	import { MEETINGS_API_URL } from "./config";
 	// import { Meeting as MeetingWithoutId, MeetingId } from "./api/db";
 	// export type MeetingType = MeetingWithoutId & { id: MeetingId };
-	let meeting: object & { id: string, cancelledAt?: string };
+	let meeting: object & { id: string; cancelledAt?: string, name: string, drink: string };
 	export let id: string;
 
 	const cancelMeeting = async (id: string): Promise<void> => {
@@ -58,9 +58,11 @@
 
 <div>
 	{#if meeting}
-		<ul>
+		See you, {meeting.name}! <span class="wave">👋</span>
+		And looking forward for our {meeting.drink}.
+		<ul class={meeting.cancelledAt ? 'cancelled' : ''}>
 			{#each Object.entries(meeting) as [key, value]}
-				{#if value && !["id", "createdAt"].includes(key)}
+				{#if value && !["id", "cancelledAt", "drink", "name", "createdAt"].includes(key)}
 					<li>{key}: {value}</li>
 				{/if}
 			{/each}
@@ -104,5 +106,64 @@
 	.btn--danger {
 		--btn-text-color: var(--cm-red);
 		--btn-accent-color: var(--cm-red);
+	}
+
+	.wave {
+		display: inline-block;
+		animation-duration: 10s;
+		animation-fill-mode: both;
+		animation-name: waving;
+		animation-timing-function: ease-in;
+		animation-duration: 0.75s;
+		animation-iteration-count: 1;
+		animation-delay: 0.5s;
+	}
+
+	@keyframes waving {
+		0% {
+			transform: rotate(9deg);
+		}
+		10% {
+			transform: rotate(-8deg);
+		}
+		20% {
+			transform: rotate(7deg);
+		}
+		30% {
+			transform: rotate(-6deg);
+		}
+		40% {
+			transform: rotate(5deg);
+		}
+		50% {
+			transform: rotate(-4deg);
+		}
+		60% {
+			transform: rotate(3deg);
+		}
+		70% {
+			transform: rotate(-2deg);
+		}
+		80% {
+			transform: rotate(1deg);
+		}
+		90% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(0deg);
+		}
+	}
+
+	.wave:hover {
+		animation-iteration-count: infinite;
+		animation-delay: 0;
+		cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='42' height='42' viewport='0 0 42 42' style='fill:black;font-size:42px;'><text y='80%'>👋</text></svg>")
+				17 0,
+			auto;
+	}
+
+	.cancelled {
+		color: grey;
 	}
 </style>

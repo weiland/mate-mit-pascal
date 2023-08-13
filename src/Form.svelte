@@ -10,11 +10,13 @@
 	} from "./config.ts";
 
 	export let state: string = "";
+
 	let drink = getDefaultDrink();
 	let other_drink = "";
 	export let name = "";
 	let inProgress = false;
 	let error: string | false = false;
+	let showMyFace = false;
 
 	function updateFocus(event: FocusEvent) {
 		const name = (event.target as HTMLInputElement)?.name;
@@ -143,6 +145,11 @@
 	<div>
 		<label for="name">🫵 name (required):</label>
 		<input
+			name="lastname"
+			type="text"
+			aria-hidden="true"
+		/>
+		<input
 			bind:value={name}
 			name="name"
 			id="name"
@@ -154,48 +161,56 @@
 			placeholder="drinker@ma.te (they/them)"
 		/>
 	</div>
+	<section>
+		<small>Other optional information:</small>
+		<div>
+			<label for="when">⌚️ When:</label>
+			<input
+				name="when"
+				id="when"
+				type="text"
+				class="input"
+				on:focus={updateFocus}
+				on:blur={resetFocus}
+				placeholder="today at 13:37 CET"
+			/>
+		</div>
+		<div>
+			<label for="where">📍 Where:</label>
+			<input
+				name="where"
+				id="where"
+				class="input"
+				type="text"
+				on:focus={updateFocus}
+				on:blur={resetFocus}
+				placeholder="on the hill"
+			/>
+		</div>
+		<div>
+			<label for="extra">✏️ Additional note/message:</label>
+			<textarea
+				name="extra"
+				id="extra"
+				class="input"
+				on:focus={updateFocus}
+				on:blur={resetFocus}
+				placeholder="take two Blåhajar and sunscreen with you"
+			/>
+		</div>
+	</section>
 	<div>
-		<label for="when">⌚️ When:</label>
-		<input
-			name="when"
-			id="when"
-			type="text"
-			class="input"
-			on:focus={updateFocus}
-			on:blur={resetFocus}
-			placeholder="today at 13:37 CET"
-		/>
-	</div>
-	<div>
-		<label for="where">📍 Where:</label>
-		<input
-			name="where"
-			id="where"
-			class="input"
-			type="text"
-			on:focus={updateFocus}
-			on:blur={resetFocus}
-			placeholder="on the hill"
-		/>
-	</div>
-	<div>
-		<label for="extra">✏️ Additional note/message:</label>
-		<textarea
-			name="extra"
-			id="extra"
-			class="input"
-			on:focus={updateFocus}
-			on:blur={resetFocus}
-			placeholder="take two Blåhajar and sunscreen with you"
-		/>
-	</div>
-	<div>
-		<button disabled={inProgress} class="btn"
+		<button
+			disabled={inProgress}
+			class="btn"
+			on:mouseover={() => (showMyFace = true)}
+			on:mouseleave={() => (showMyFace = false)}
 			>👉 Let's drink a {(drink === OTHER_DRINK
 				? other_drink
 				: drink) || "mate"}
 			together! (send)</button
 		>
+		<span hidden={!showMyFace}> 🥺 </span>
 	</div>
 </form>
 
@@ -236,6 +251,14 @@
 		transition: none;
 		box-shadow: 0 0 0 0.125rem var(--cm-yellow-bright),
 			0 0 0 0.4rem var(--cm-blue);
+	}
+
+	.input:invalid {
+		background: var(--white);
+		outline: none;
+		transition: none;
+		box-shadow: 0 0 0 0.125rem var(--cm-yellow-bright),
+			0 0 0 0.4rem var(--cm-red);
 	}
 	.error {
 		padding: 0.75rem;

@@ -105,7 +105,11 @@ apiRouter
 		const form = context.request.body({ type: 'form-data' });
 		const json = await form.value.read();
 		const meeting = json.fields as unknown as Meeting;
-		console.log('meeting', meeting);
+		if (meeting.lastname && meeting.lastname.length > 0) {
+			context.response.status = 400;
+			context.response.body = { error: 'action forbidden' };
+		}
+		console.log('new meeting', meeting);
 		const body = await createMeeting(meeting);
 		context.response.body = body;
 	})

@@ -1,6 +1,9 @@
 # Drink Mate with me 🧉
 
-An application to keep track of people to drink a drink with.
+> An application to keep track of people to drink a drink with.
+
+https://drink-mate-with.keinehobbi.es/
+
 
 ## Tech Stack
 
@@ -15,7 +18,7 @@ An application to keep track of people to drink a drink with.
 
 ## Tasks
 
-```commands
+```command
 # Frontend development
 deno task dev
 

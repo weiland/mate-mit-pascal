@@ -105,6 +105,7 @@ a:hover {
 
 .card--mini .card-content {
 	font-size: 2rem;
+	line-height: 1.5;
 }
 
 @media only screen and (min-width: 30em) {
