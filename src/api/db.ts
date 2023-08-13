@@ -1,5 +1,6 @@
 /// <reference lib="deno.unstable" />
 import { crypto } from 'https://deno.land/std@0.194.0/crypto/mod.ts';
+import { sendPush } from './push.ts';
 
 export type MeetingId = string;
 
@@ -66,6 +67,7 @@ export async function createMeeting(meeting: Meeting): DBMeetingResponse {
 			error: 'Something went wrong when creating the meeting db entry.',
 		};
 	}
+	await sendPush(meeting.name, uuid);
 	return { ...meeting, id: uuid };
 }
 
