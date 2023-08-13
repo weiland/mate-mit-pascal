@@ -90,7 +90,7 @@ a:hover {
 
 .card {
 	margin: 0 auto;
-	padding: 1em;
+	padding: 1rem;
 	border-image: url('/card-border.png') 30 / 19px round;
 }
 
@@ -98,9 +98,10 @@ a:hover {
 	max-width: 42rem;
 }
 .card-content {
-	padding: 0;
+	padding: 0.5rem;
 	background: radial-gradient(var(--cm-yellow-bright), var(--cm-yellow));
 	border-radius: 1rem;
+	text-align: center;
 }
 
 .card--mini .card-content {
@@ -114,6 +115,7 @@ a:hover {
 	}
 	.card-content {
 		padding: 1rem;
+		text-align: left;
 	}
 }
 
