@@ -1,4 +1,5 @@
 /// <reference lib="deno.unstable" />
+
 // import webpush from 'npm:web-push'; // Deno Deploy does not support it (also it does not work in Deno)
 
 export interface PushSubscription {
@@ -76,7 +77,6 @@ async function fakePush(subscription: PushSubscription, message: string) {
 		method: 'POST',
 		mode: 'cors',
 	};
-	console.log('options', options, subscription, publicKey, privateKey, message, otherHost);
 	return await fetch(`${otherHost}api/send-push-msg`, options);
 }
 

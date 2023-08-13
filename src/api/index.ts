@@ -109,21 +109,6 @@ apiRouter
 		console.log('set push data', data);
 		context.response.body = 'ok';
 	})
-	.get('/api/push', async (context: Context) => {
-		const form = context.request.body();
-		const data = await form.value;
-		console.log('send push', typeof data);
-		const res = await sendPush('test-name', 'test-id').catch((e) => {
-			console.error('send push error:', e);
-		});
-		console.log('send push res', res);
-		if (!res) {
-			context.response.status = 400;
-			context.response.body = 'error';
-			return;
-		}
-		context.response.body = 'ok';
-	})
 	.post('/api/login', async (context: Context) => {
 		const PASSWORD = Deno.env.get('PASSWORD');
 

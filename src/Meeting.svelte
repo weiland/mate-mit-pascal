@@ -70,7 +70,9 @@
 		on:click={() => deleteMeeting(meeting.id)}
 		>delete meeting</button
 	>
-	<a href="/">go back to startpage</a>
+	<p>
+		<a href="/">go back to startpage</a>
+	</p>
 </div>
 
 <style>
