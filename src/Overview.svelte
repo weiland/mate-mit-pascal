@@ -9,16 +9,8 @@
 	let meetings: object[];
 	let error: false | string = false;
 
-	isLoggedIn?.subscribe(async (value: boolean) => {
-		console.log("login update (in overview) to:", value);
-		loggedIn = value;
-		if (value === true && typeof meetings === 'undefined') {
-			await fetchMeetings();
-		}
-	});
-
 	const fetchMeetings = async () => {
-		error = ""
+		error = "";
 		try {
 			const res = await fetch(`${MEETINGS_API_URL}`, {
 				mode: "cors",
@@ -48,6 +40,14 @@
 			error = "Could not fetch all meetings.";
 		}
 	};
+
+	isLoggedIn?.subscribe(async (value: boolean) => {
+		console.log("login update (in overview) to:", value);
+		loggedIn = value;
+		if (value === true && typeof meetings === "undefined") {
+			await fetchMeetings();
+		}
+	});
 
 	const setDrunk = async (id: string): Promise<void> => {
 		const res = await fetch(`${MEETINGS_API_URL}/${id}/drunk`, {

@@ -39,3 +39,5 @@ export const DEFAULT_STATE: NamesMapKeys = 'drink';
 const API_HOST = import.meta.env.VITE_API_HOST ?? '';
 export const API_BASE_URL = `${API_HOST}/api`;
 export const MEETINGS_API_URL = `${API_BASE_URL}/meetings`;
+
+export const PUBLIC_KEY = import.meta.env.VITE_PUSH_PUBLIC_KEY ?? '';

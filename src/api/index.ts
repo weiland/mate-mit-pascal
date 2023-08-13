@@ -3,7 +3,6 @@ import {
 	helpers,
 	Router,
 } from 'https://deno.land/x/oak@v12.4.0/mod.ts';
-import { load } from 'https://deno.land/std@0.194.0/dotenv/mod.ts';
 import {
 	cancelMeeting,
 	createMeeting,
@@ -13,15 +12,17 @@ import {
 	getMeeting,
 	Meeting,
 } from './db.ts';
+import { sendPush, setPushSubscription } from './push.ts';
+
 const { getQuery } = helpers;
 
-let env: Record<string, string | undefined> = {};
 if (Deno.env.has('IS_DEV') && Deno.env.get('IS_DEV') === 'true') {
 	// local env -> source dotenv
-	env = await load({ allowEmptyValues: true });
+	await import('https://deno.land/std@0.194.0/dotenv/load.ts');
+	// env = await load({ allowEmptyValues: true }); // TODO(pascal): find out how to set it with autoload
 }
 
-const TOKEN = Deno.env.get('TOKEN') ?? env.TOKEN;
+const TOKEN = Deno.env.get('TOKEN');
 
 const isLoggedIn = async (context: Context): Promise<boolean> =>
 	TOKEN === await context.cookies.get('token');
@@ -88,8 +89,32 @@ apiRouter
 		const body = await createMeeting(meeting);
 		context.response.body = body;
 	})
+	.post('/api/push', async (context: Context) => {
+		const form = context.request.body();
+		const data = await form.value;
+		await setPushSubscription(data).catch((e) =>
+			console.error('set push user error:', e)
+		);
+		console.log('set push data', data);
+		context.response.body = 'ok';
+	})
+	.get('/api/push', async (context: Context) => {
+		const form = context.request.body();
+		const data = await form.value;
+		console.log('send push', typeof data);
+		const res = await sendPush('test-name', 'test-id').catch((e) => {
+			console.error('send push error:', e);
+		});
+		console.log('send push res', res);
+		if (!res) {
+			context.response.status = 400;
+			context.response.body = 'error';
+			return;
+		}
+		context.response.body = 'ok';
+	})
 	.post('/api/login', async (context: Context) => {
-		const PASSWORD = Deno.env.get('PASSWORD') ?? env.PASSWORD;
+		const PASSWORD = Deno.env.get('PASSWORD');
 
 		if (!PASSWORD || !TOKEN) {
 			console.error('There are missing credentials.');
