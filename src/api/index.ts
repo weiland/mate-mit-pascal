@@ -18,6 +18,8 @@ const { getQuery } = helpers;
 const env = await load();
 const TOKEN = Deno.env.get('TOKEN') ?? env['TOKEN'];
 
+console.log('token', Deno.env.get('TOKEN'), env['TOKEN']);
+
 const isLoggedIn = async (context: Context): Promise<boolean> =>
 	TOKEN === await context.cookies.get('token');
 
