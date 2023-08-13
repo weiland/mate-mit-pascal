@@ -20,5 +20,5 @@
 </script>
 
 {#if loggedIn}
-	<button on:click|preventDefault={logout}>Logout</button>
+	| <button on:click|preventDefault={logout}>Logout</button>
 {/if}

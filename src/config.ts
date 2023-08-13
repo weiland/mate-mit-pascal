@@ -1,4 +1,4 @@
-export const DEFAULT_NAME = import.meta.env.VITE_NAME ?? 'NoName';
+export const DEFAULT_NAME = import.meta.env.VITE_NAME ?? 'Pasci';
 export const OTHER_DRINK = 'other';
 export const DRINKS = [
 	'Traditional Mate 🧉',

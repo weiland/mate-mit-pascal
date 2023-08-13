@@ -7,7 +7,7 @@
 
 	let isSubscribed = false;
 
-	let pushButtonText = "Enable Push Messaging";
+	let pushButtonText = "Enable Push Messaging (init)";
 	let pushButtonDisabled = true;
 
 	let subscriptionJson = "";
@@ -22,6 +22,7 @@
 			pushButtonText = "Push Messaging Blocked";
 			pushButtonDisabled = true;
 			updateSubscriptionOnServer(null);
+			error = "permissions are denied";
 			return;
 		}
 
@@ -44,6 +45,8 @@
 					console.log("User IS subscribed.");
 				} else {
 					console.log("User is NOT subscribed.");
+					error = "user is not subscribed";
+
 				}
 
 				updateBtn();
@@ -86,7 +89,12 @@
 				method: "POST",
 				body: subscriptionJson,
 			})
-				.then((res) => console.log("sent to backend.", res.status))
+				.then((res) =>
+					console.log(
+						"sent to backend.",
+						res.status
+					)
+				)
 				.catch((err) =>
 					console.error(
 						"Error during push user creation",

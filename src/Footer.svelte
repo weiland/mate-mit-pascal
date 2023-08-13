@@ -3,7 +3,12 @@
 </script>
 
 <footer class="footer">
-	🧉 | created by <a
+	<a
+		href="/"
+		aria-label="Go to startpage"
+		target="_blank">🧉 (home)</a
+	>
+	 | created by <a
 		href="https://chaos.social/@pascal"
 		rel="noopener"
 		target="_blank">@pascal@chaos.social</a

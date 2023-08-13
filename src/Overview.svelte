@@ -138,7 +138,6 @@
 	{:else}
 		no meeting loaded yet.
 	{/if}
-	<a href="/">go back to startpage</a>
 </div>
 
 <style>
