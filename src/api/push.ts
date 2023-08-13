@@ -55,8 +55,8 @@ export async function setPushSubscription(
 // Temporarely, use other service since web-push does not work in Deno. :c
 async function fakePush(subscription: PushSubscription, message: string) {
 	const otherHost = Deno.env.get('OTHER_HOST');
-	return await fetch(`${otherHost}api/send-push-msg`, {
-		'credentials': 'omit',
+	const options = {
+		credentials: 'omit',
 		'headers': {
 			'User-Agent':
 				'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/116.0',
@@ -73,9 +73,11 @@ async function fakePush(subscription: PushSubscription, message: string) {
 		'body': `{"subscription":${
 			JSON.stringify(subscription)
 		},"data":"${message}","applicationKeys":{"public":"${publicKey}","private":"${privateKey}"}}`,
-		'method': 'POST',
-		'mode': 'cors',
-	});
+		method: 'POST',
+		mode: 'cors',
+	};
+	console.log('options', options);
+	return await fetch(`${otherHost}api/send-push-msg`, options);
 }
 
 function sendPushToUser(
