@@ -29,6 +29,7 @@ export const namesMap = {
 	when: '⌚️',
 	where: '📍',
 	extra: '✏️',
+	pleading: '🥺',
 	horny: '🍆',
 };
 

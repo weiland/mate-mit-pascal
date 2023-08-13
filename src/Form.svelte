@@ -144,11 +144,7 @@
 	</p>
 	<div>
 		<label for="name">🫵 name (required):</label>
-		<input
-			name="lastname"
-			type="text"
-			aria-hidden="true"
-		/>
+		<input name="lastname" type="text" aria-hidden="true" />
 		<input
 			bind:value={name}
 			name="name"
@@ -203,9 +199,16 @@
 		<button
 			disabled={inProgress}
 			class="btn"
+			name="pleading"
 			on:mouseover={() => (showMyFace = true)}
-			on:focus={() => (showMyFace = true)}
-			on:blur={() => (showMyFace = false)}
+			on:focus={(e) => {
+				showMyFace = false;
+				updateFocus(e);
+			}}
+			on:blur={() => {
+				showMyFace = false;
+				resetFocus();
+			}}
 			on:mouseleave={() => (showMyFace = false)}
 			>👉 Let's drink a {(drink === OTHER_DRINK
 				? other_drink
@@ -213,6 +216,7 @@
 			together! (send)</button
 		>
 		<span hidden={!showMyFace}> 🥺 </span>
+		<div hidden={!inProgress}>💌 sending ...</div>
 	</div>
 </form>
 
