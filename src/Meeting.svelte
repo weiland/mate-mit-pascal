@@ -3,7 +3,12 @@
 	import { MEETINGS_API_URL } from "./config";
 	// import { Meeting as MeetingWithoutId, MeetingId } from "./api/db";
 	// export type MeetingType = MeetingWithoutId & { id: MeetingId };
-	let meeting: object & { id: string; cancelledAt?: string, name: string, drink: string };
+	let meeting: object & {
+		id: string;
+		cancelledAt?: string;
+		name: string;
+		drink: string;
+	};
 	export let id: string;
 
 	const cancelMeeting = async (id: string): Promise<void> => {
@@ -56,11 +61,11 @@
 	});
 </script>
 
-<div>
-	{#if meeting}
-		See you, {meeting.name}! <span class="wave">👋</span>
-		And looking forward for our {meeting.drink}.
-		<ul class={meeting.cancelledAt ? 'cancelled' : ''}>
+{#if meeting}
+	<div class={meeting.cancelledAt ? "cancelled" : ""}>
+		See you, <b>{meeting.name}</b>! <span class="wave">👋</span>
+		And looking forward for our <b>{meeting.drink}</b>.
+		<ul>
 			{#each Object.entries(meeting) as [key, value]}
 				{#if value && !["id", "cancelledAt", "drink", "name", "createdAt"].includes(key)}
 					<li>{key}: {value}</li>
@@ -86,13 +91,13 @@
 			on:click={() => deleteMeeting(meeting.id)}
 			>delete meeting</button
 		>
-	{:else}
-		no meeting loaded yet.
-	{/if}
-	<p>
-		<a href="/">go back to startpage</a>
-	</p>
-</div>
+	</div>
+{:else}
+	no meeting loaded yet.
+{/if}
+<p>
+	<a href="/">go back to startpage</a>
+</p>
 
 <style>
 	a,
