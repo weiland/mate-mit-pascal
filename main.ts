@@ -18,6 +18,7 @@ async function serveStaticFiles(context: Context, next: Next) {
 	const root = `${Deno.cwd()}/dist`;
 	try {
 		// attempt to load public files (static assets) or sub-directories
+		context.response.headers.set('x-clacks-overhead', 'GNU Terry Pratchett');
 		await context.send({
 			root,
 			index: 'index.html',
