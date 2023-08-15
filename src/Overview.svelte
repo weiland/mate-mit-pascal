@@ -150,6 +150,10 @@
 		overflow-x: scroll;
 		position: relative;
 	}
+	td {
+		padding: 0.5rem;;
+		border-bottom: 2px solid var(--cm-orange);
+	}
 	a,
 	a:visited {
 		color: var(--cm-blue);
