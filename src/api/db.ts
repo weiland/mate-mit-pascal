@@ -33,7 +33,9 @@ const kv = await Deno.openKv();
 export async function getAllMeetings(): DBMeetingResponse {
 	const meetings: Meeting[] = [];
 	for await (const res of kv.list<Meeting>({ prefix: ['meeting'] })) {
-		meetings.push(res.value);
+		const meeting = res.value;
+		meeting.id = JSON.stringify(res.key) ?? 'no_id';
+		meetings.push(meeting);
 	}
 	return meetings;
 }
