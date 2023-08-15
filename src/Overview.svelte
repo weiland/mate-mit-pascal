@@ -86,6 +86,8 @@
 					<!-- <td>Id</td> -->
 					<td>Name</td>
 					<td>Drink</td>
+					<td>When</td>
+					<td>Where</td>
 					<td>Note</td>
 					<td>Created</td>
 					<td>Cancelled</td>
@@ -105,6 +107,8 @@
 							></td
 						>
 						<td>{meeting.drink}</td>
+						<td>{meeting.when}</td>
+						<td>{meeting.where}</td>
 						<td>{meeting.extra}</td>
 						<td>{meeting.createdAt}</td>
 						<td>{meeting.cancelledAt}</td>
