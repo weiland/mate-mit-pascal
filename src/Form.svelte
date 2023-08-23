@@ -265,10 +265,10 @@
 		pointer-events: none;
 	}
 
-	/* .input:invalid { */
-	/* 	box-shadow: 0 0 0 0.125rem var(--cm-yellow-bright), */
-	/* 		0 0 0 0.4rem var(--cm-red); */
-	/* } */
+	.input:user-invalid {
+		box-shadow: 0 0 0 0.125rem var(--cm-yellow-bright),
+			0 0 0 0.4rem var(--cm-red);
+	}
 	.error {
 		padding: 0.75rem;
 		border-radius: 0.25rem;
